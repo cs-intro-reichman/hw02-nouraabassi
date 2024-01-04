@@ -26,68 +26,70 @@
 import java.util.Random;
 
 public class OneOfEachStats {
-    public static void main(String[] args) {
-       
-
-        int T = Integer.parseInt(args[0]);
-        int seed = Integer.parseInt(args[1]);
-
+	public static void main (String[] args) {
+		// Gets the two command-line arguments
+		int T = Integer.parseInt(args[0]);
+		int seed = Integer.parseInt(args[1]);
+		// Initailizes a random numbers generator with the given seed value
         Random generator = new Random(seed);
-
-        int totalChildren = 0;
-        int twoChildren = 0;
-        int threeChildren = 0;
-        int fourOrMoreChildren = 0;
-        int mode = 0;
-        int modeCount = 0;
-
-        for (int i = 0; i < T; i++) {
-            boolean hasBoy = false;
-            boolean hasGirl = false;
-            int childrenCount = 0;
-
-            while (!hasBoy && !hasGirl) {
-                double rnd = generator.nextDouble();
-
-                if (rnd < 0.5) {
-                    hasBoy = true;
-                } else {
-                    hasGirl = true;
-                }
-                childrenCount++;
-            }
-
-            totalChildren += childrenCount;
-
-            if (childrenCount == 2) {
-                twoChildren++;
-                if (twoChildren > modeCount) {
-                    mode = 2;
-                    modeCount = twoChildren;
-                }
-            } else if (childrenCount == 3) {
-                threeChildren++;
-                if (threeChildren > modeCount) {
-                    mode = 3;
-                    modeCount = threeChildren;
-                }
-            } else if (childrenCount >= 4) {
-                fourOrMoreChildren++;
-                if (fourOrMoreChildren > modeCount) {
-                    mode = 4;
-                    modeCount = fourOrMoreChildren;
-                }
-            }
-        }
-
-        double average = (double) totalChildren / T;
-
-        System.out.println("Average: " + average + " children to get at least one of each gender.");
-        System.out.println("Number of families with 2 children: " + twoChildren);
-        System.out.println("Number of families with 3 children: " + threeChildren);
-        System.out.println("Number of families with 4 or more children: " + fourOrMoreChildren);
-        System.out.println("The most common number of children is: " + (mode == 4 ? "4 or more" : mode));
-    }
+		stats(T, generator);
+		
+		//// In the previous version of this program, you used a statement like:
+		//// double rnd = Math.random();
+		//// Where "rnd" is the variable that stores the generated random value.
+		//// In this version of the program, replace this statement with:
+		//// double rnd = generator.nextDouble();
+		//// This statement will generate a random value in the range [0,1),
+		//// just like you had in the previous version, except that the 
+		//// randomization will be based on the given seed.
+		//// This is the only change that you have to do in the program.
+		    
+	}
+	public static void stats(int times, Random seed){
+		double averageChildren = 0;
+		int FamiliesWithTwo = 0;
+		int FamiliesWithThree = 0;
+		int familiesWithFourOrMore = 0;
+		double totalChildren = 0;
+		for (int i = 0; i < times; i++) {
+			double numOfBoys = 0;
+			double numOFGirls = 0;
+			while (numOfBoys == 0 || numOFGirls == 0) {
+				double rnd = seed.nextDouble();
+				if (rnd < 0.5) {
+					numOfBoys++;
+				}
+				else{
+					numOFGirls++;
+				}
+				totalChildren++;
+			}
+			if (numOfBoys + numOFGirls == 2) {
+				FamiliesWithTwo++;
+			}
+			else if (numOfBoys + numOFGirls == 3) {
+				FamiliesWithThree++;
+			}
+			else if (numOfBoys + numOFGirls >= 4) {
+				familiesWithFourOrMore++;
+			}
+		}
+		averageChildren = totalChildren / times;
+		String mostCommonAmountOfChildren = "The most common number of children is ";
+		if (FamiliesWithTwo > FamiliesWithThree && FamiliesWithTwo > familiesWithFourOrMore) {
+			mostCommonAmountOfChildren += 2 + ".";
+		}
+		else if (FamiliesWithThree > FamiliesWithTwo && FamiliesWithThree > familiesWithFourOrMore) {
+			mostCommonAmountOfChildren += 3 + ".";
+		}
+		else if (familiesWithFourOrMore > FamiliesWithTwo && familiesWithFourOrMore > FamiliesWithThree) {
+			mostCommonAmountOfChildren += 4 + " or more.";
+		}
+		System.out.println("Average: " + averageChildren + " children to get at least one of each gender.");
+		System.out.println("Number of families with 2 children: " + FamiliesWithTwo);
+		System.out.println("Number of families with 3 children: " + FamiliesWithThree);
+		System.out.println("Number of families with 4 or more children: " + familiesWithFourOrMore);
+		System.out.println(mostCommonAmountOfChildren);
+	}
 }
-
 
