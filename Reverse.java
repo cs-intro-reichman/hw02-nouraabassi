@@ -12,17 +12,19 @@ public class Reverse {
         String k = args[0];
         int length = k.length();
 
-        // Printing the reversed string
+
         for (int i = length - 1; i >= 0; i--) {
             System.out.print(k.charAt(i));
         }
 
-        // Finding the middle character(s)
-        if (length % 2 != 0) {
+       
+       if (length % 2 != 0) {
             System.out.println("\nThe middle character is " + k.charAt(length / 2));
-        } else {
+        } 
+        /* if (length % 2 != 0){
             int mid = length / 2;
             System.out.println("\nThe middle characters are " + k.charAt(mid - 1) + " and " + k.charAt(mid));
-        }
+        }*/
+        
     }
 }
