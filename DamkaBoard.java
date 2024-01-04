@@ -3,12 +3,16 @@
  */
 public class DamkaBoard {
     public static void main(String[] args) {
+        if (args.length != 1) {
+            System.out.println("Please provide a single integer as a command-line argument.");
+            return;
+        }
+
         int n = Integer.parseInt(args[0]);
 
         for (int i = 0; i < n; i++) {
-            for (int f = 0; f < n; f++) {
-           
-                if ((i + f) % 2 == 0) {
+            for (int j = 0; j < n; j++) {
+                if ((i + j) % 2 == 0) {
                     System.out.print("* ");
                 } else {
                     System.out.print("  ");
