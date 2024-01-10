@@ -1,3 +1,8 @@
+/*
+#feedback
+1. try to keep the indentation and lines in consistent locations so the code would be more readable for you when debugging.
+*/
+
 /**
  *  Gets a command-line argument (int), and prints all the divisors of the given number.
  */
