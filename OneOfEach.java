@@ -1,4 +1,8 @@
-
+/*
+#feedback
+1. you code doesn’t handle a case where 0.5 = = Math.random();
+2. try next time to write down edge case that might happen and then add it to the code
+*/
 
 /**
  *  Simulates the formation of a family in which the parents decide 
